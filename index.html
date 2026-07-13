@@ -1238,3 +1238,1125 @@
     </script>
   </body>
 </html>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        margin: 0;
+        position: relative;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        filter: blur(90px);
+        opacity: 0.16;
+        pointer-events: none;
+        z-index: -1;
+      }
+      body::before {
+        top: -120px;
+        right: -80px;
+        background: linear-gradient(135deg, var(--accent), var(--amber));
+      }
+      body::after {
+        bottom: -140px;
+        left: -100px;
+        background: linear-gradient(135deg, var(--amber), var(--accent));
+      }
+      h1,
+      h2,
+      h3,
+      .mono {
+        font-family: var(--font-display);
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      section {
+        padding: 100px 0 80px;
+      }
+      .eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+        color: var(--amber);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .eyebrow::before {
+        content: "//";
+        color: var(--text-secondary);
+      }
+      .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+        letter-spacing: -0.01em;
+        display: inline-block;
+      }
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 52px;
+        height: 3px;
+        margin-top: 10px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent), var(--amber));
+      }
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      /* ============ NAV / TAB BAR ============ */
+      .tab-bar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(17, 23, 41, 0.8);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+      html[data-theme="light"] .tab-bar {
+        background: rgba(255, 255, 255, 0.82);
+      }
+      .tab-bar-inner {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 14px 24px;
+      }
+      .brand {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--text-primary);
+      }
+      .cursor-blink {
+        color: var(--amber);
+        animation: blink 1s step-end infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      .tabs {
+        list-style: none;
+        display: flex;
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+        overflow-x: auto;
+        flex: 1;
+      }
+      .tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .tab {
+        font-family: var(--font-display);
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        padding: 8px 14px;
+        border-radius: var(--radius) var(--radius) 0 0;
+        white-space: nowrap;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          color 0.2s ease,
+          border-color 0.2s ease,
+          background-color 0.2s ease;
+      }
+      .tab .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--text-secondary);
+        flex: none;
+      }
+      .tab:hover {
+        color: var(--text-primary);
+        background: var(--surface);
+      }
+      .tab.active {
+        color: var(--text-primary);
+        border-color: var(--accent);
+      }
+      .tab.active .dot {
+        background: var(--amber);
+      }
+      .tab i {
+        margin-right: 6px;
+        width: 14px;
+        text-align: center;
+      }
+      .theme-toggle,
+      .github-link {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex: none;
+        transition:
+          background-color 0.2s ease,
+          transform 0.2s ease,
+          border-color 0.2s ease;
+        text-decoration: none;
+      }
+      .theme-toggle:hover,
+      .github-link:hover {
+        background: var(--accent-soft);
+        border-color: var(--accent);
+        transform: rotate(10deg);
+      }
+      .github-link {
+        color: var(--text-primary);
+      }
+      .navbar-toggle-btn {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        width: 38px;
+        height: 38px;
+        border-radius: var(--radius);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex: none;
+      }
+      .navbar-toggle-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      @media (max-width: 991px) {
+        .navbar-toggle-btn {
+          display: flex;
+        }
+        .tabs {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 2px;
+          background: var(--bg-elevated);
+          border-bottom: 1px solid var(--border);
+          max-height: 0;
+          overflow: hidden;
+          padding: 0 24px;
+          transition: max-height 0.25s ease;
+        }
+        .tabs.open {
+          max-height: 320px;
+          padding: 10px 24px;
+        }
+        .tab {
+          border-radius: var(--radius);
+          border-bottom: none;
+          border-left: 2px solid transparent;
+          padding: 10px 12px;
+        }
+        .tab.active {
+          border-left-color: var(--accent);
+          background: var(--surface);
+        }
+      }
+
+      /* ============ HERO ============ */
+      .hero {
+        padding: 90px 0 70px;
+        position: relative;
+      }
+      .hero-greeting {
+        color: var(--text-secondary);
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+      }
+      .hero h1 {
+        font-size: 2.9rem;
+        line-height: 1.1;
+        margin: 0 0 10px;
+      }
+      .hero h1 .accent {
+        color: var(--accent);
+      }
+      .hero .role {
+        font-family: var(--font-display);
+        color: var(--amber);
+        font-size: 1.15rem;
+        margin-bottom: 20px;
+      }
+      .hero p.lede {
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+        max-width: 480px;
+        margin-bottom: 30px;
+      }
+      .avatar-bubble {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        margin-bottom: 22px;
+        border: 3px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 16px 36px rgba(76, 141, 255, 0.24);
+      }
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 26px;
+      }
+      .btn-accent {
+        background: linear-gradient(135deg, var(--accent), var(--amber));
+        color: #0a0e1a;
+        border: none;
+        padding: 11px 22px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+        box-shadow: 0 10px 24px rgba(76, 141, 255, 0.2);
+      }
+      .btn-accent:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+        color: #0a0e1a;
+      }
+      .btn-ghost {
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+        padding: 11px 22px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        transition:
+          border-color 0.15s ease,
+          color 0.15s ease,
+          background-color 0.15s ease;
+      }
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .contact-inline {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        font-size: 0.92rem;
+      }
+      .contact-inline a {
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .contact-inline a:hover {
+        color: var(--accent);
+      }
+
+      /* code card */
+      .code-card {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+      .code-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(76, 141, 255, 0.08),
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      .code-card-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 14px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .code-card-bar .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+      }
+      .code-card-bar .filename {
+        margin-left: 10px;
+        font-family: var(--font-display);
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+      }
+      .code-card pre {
+        margin: 0;
+        padding: 22px 20px;
+        font-family: var(--font-display);
+        font-size: 0.86rem;
+        line-height: 1.65;
+        color: var(--text-primary);
+        min-height: 230px;
+        white-space: pre-wrap;
+      }
+      .code-card pre .k {
+        color: var(--accent);
+      }
+      .code-card pre .s {
+        color: var(--amber);
+      }
+
+      /* ============ SKILLS ============ */
+      .skill-card {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 26px;
+        height: 100%;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .skill-card:hover,
+      .project-card:hover,
+      .contact-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: var(--shadow);
+      }
+      .skill-card h3 {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .skill-card h3 i {
+        color: var(--amber);
+      }
+      .pill {
+        display: inline-block;
+        font-family: var(--font-display);
+        font-size: 0.78rem;
+        background: var(--accent-soft);
+        color: var(--accent);
+        padding: 5px 12px;
+        border-radius: 999px;
+        margin: 0 6px 8px 0;
+      }
+
+      /* ============ PROJECTS ============ */
+      .project-card {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        height: 100%;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .project-topbar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .project-topbar .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .project-topbar .filename {
+        margin-left: 8px;
+        font-family: var(--font-display);
+        font-size: 0.76rem;
+        color: var(--text-secondary);
+      }
+      .project-image-link {
+        display: block;
+        overflow: hidden;
+      }
+      .project-image-link img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.35s ease;
+      }
+      .project-image-link:hover img {
+        transform: scale(1.06);
+      }
+      .project-body {
+        padding: 22px;
+      }
+      .project-body h3 {
+        font-size: 1.15rem;
+        margin-bottom: 8px;
+      }
+      .project-body p {
+        color: var(--text-secondary);
+        font-size: 0.92rem;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+      .project-link {
+        font-family: var(--font-display);
+        font-size: 0.82rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* ============ CONTACT ============ */
+      .contact-card {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 32px;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .form-control-custom {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        border-radius: var(--radius);
+        padding: 11px 14px;
+        font-family: var(--font-body);
+        width: 100%;
+        margin-bottom: 16px;
+      }
+      .form-control-custom:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
+      .form-label-custom {
+        font-family: var(--font-display);
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+        display: block;
+      }
+      .status-msg {
+        font-size: 0.88rem;
+        margin-top: 10px;
+      }
+      .status-msg.success {
+        color: #27c93f;
+      }
+      .status-msg.error {
+        color: var(--dot-red);
+      }
+      .direct-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+      .direct-contact-item .icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+      }
+      .direct-contact-item a,
+      .direct-contact-item span {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+      .direct-contact-item small {
+        display: block;
+        color: var(--text-secondary);
+        font-size: 0.78rem;
+      }
+
+      /* ============ FOOTER ============ */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 26px 0;
+        text-align: center;
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
+      @media (max-width: 767px) {
+        .hero {
+          padding: 50px 0 40px;
+          text-align: left;
+        }
+        .hero h1 {
+          font-size: 2.1rem;
+        }
+        section {
+          padding: 70px 0 60px;
+        }
+        .code-card {
+          margin-top: 36px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- ============ NAV ============ -->
+      <nav class="tab-bar">
+        <div class="tab-bar-inner container-lg">
+          <div class="brand">TS<span class="cursor-blink">_</span></div>
+
+          <button
+            class="navbar-toggle-btn"
+            id="navToggleBtn"
+            onclick="toggleNavMenu()"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <ul class="tabs" id="navTabs">
+            <li class="tab" data-target="home" onclick="goToSection('home')">
+              <span class="dot"></span><i class="fa-solid fa-house"></i>home.vue
+            </li>
+            <li
+              class="tab"
+              data-target="skills"
+              onclick="goToSection('skills')"
+            >
+              <span class="dot"></span
+              ><i class="fa-solid fa-code"></i>skills.json
+            </li>
+            <li
+              class="tab"
+              data-target="projects"
+              onclick="goToSection('projects')"
+            >
+              <span class="dot"></span
+              ><i class="fa-solid fa-folder-open"></i>projects.js
+            </li>
+            <li
+              class="tab"
+              data-target="contact"
+              onclick="goToSection('contact')"
+            >
+              <span class="dot"></span
+              ><i class="fa-solid fa-paper-plane"></i>contact.form
+            </li>
+          </ul>
+
+          <a
+            class="github-link"
+            href="https://github.com/sieitha15"
+            target="_blank"
+            rel="noopener"
+            aria-label="Visit GitHub profile"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+
+          <button
+            class="theme-toggle"
+            id="themeToggleBtn"
+            onclick="toggleTheme()"
+            aria-label="Toggle color theme"
+          >
+            <i class="fa-solid fa-moon" id="iconMoon"></i>
+            <i class="fa-solid fa-sun" id="iconSun" style="display: none"></i>
+          </button>
+        </div>
+      </nav>
+
+      <!-- ============ HERO ============ -->
+      <section id="home" data-section="home" class="hero">
+        <div class="container-lg">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+              <img
+                src="./assets/img/thasiei.png"
+                class="avatar-bubble"
+                alt="Tha Sie"
+              />
+              <div class="hero-greeting">$ who am i ?</div>
+              <h1>Hi, I'm <span class="accent">Tha Sie</span></h1>
+              <div class="role">Web Developer</div>
+              <p class="lede">
+                I build fast, responsive web apps end-to-end — from Vue/Nuxt
+                front ends to Node &amp; database-backed APIs. Currently open to
+                freelance and full-time opportunities.
+              </p>
+              <div class="hero-actions">
+                <a
+                  href="#projects"
+                  class="btn-accent"
+                  @click.prevent="scrollTo('projects')"
+                  >View projects <i class="fa-solid fa-arrow-right"></i
+                ></a>
+                <a
+                  href="#contact"
+                  class="btn-ghost"
+                  @click.prevent="scrollTo('contact')"
+                  >Contact me <i class="fa-solid fa-paper-plane"></i
+                ></a>
+              </div>
+              <div class="contact-inline">
+                <a href="mailto:Thasiei06@gmail.com"
+                  ><i class="fa-solid fa-envelope"></i> Thasiei06@gmail.com</a
+                >
+                <a href="tel:085278275"
+                  ><i class="fa-solid fa-phone"></i> 085 278 275</a
+                >
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="code-card">
+                <div class="code-card-bar">
+                  <span class="dot" style="background: var(--dot-red)"></span>
+                  <span class="dot" style="background: var(--dot-amber)"></span>
+                  <span class="dot" style="background: var(--dot-green)"></span>
+                  <span class="filename">profile.js</span>
+                </div>
+                <pre>{{ heroTyped }}<span class="cursor-blink">|</span></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SKILLS ============ -->
+      <section id="skills" data-section="skills">
+        <div class="container-lg">
+          <div class="eyebrow">skills.json</div>
+          <h2 class="section-title">What I work with</h2>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="skill-card">
+                <h3><i class="fa-solid fa-display"></i> Frontend</h3>
+                <div>
+                  <span class="pill" v-for="s in skills.frontend" :key="s"
+                    >{{ s }}</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="skill-card">
+                <h3><i class="fa-solid fa-server"></i> Backend</h3>
+                <div>
+                  <span class="pill" v-for="s in skills.backend" :key="s"
+                    >{{ s }}</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="skill-card">
+                <h3><i class="fa-solid fa-database"></i> Database &amp; UX</h3>
+                <div>
+                  <span class="pill" v-for="s in skills.data" :key="s"
+                    >{{ s }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROJECTS ============ -->
+      <section id="projects" data-section="projects">
+        <div class="container-lg">
+          <div class="eyebrow">projects.js</div>
+          <h2 class="section-title">Selected work</h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4" v-for="p in projects" :key="p.id">
+              <div class="project-card">
+                <div class="project-topbar">
+                  <span class="dot" style="background: var(--dot-red)"></span>
+                  <span class="dot" style="background: var(--dot-amber)"></span>
+                  <span class="dot" style="background: var(--dot-green)"></span>
+                  <span class="filename">{{ p.file }}</span>
+                </div>
+                <a
+                  class="project-image-link"
+                  :href="p.link"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img :src="p.image" :alt="p.title" />
+                </a>
+                <div class="project-body">
+                  <h3>{{ p.title }}</h3>
+                  <p>{{ p.description }}</p>
+                  <div class="mb-3">
+                    <span class="pill" v-for="tag in p.tags" :key="tag"
+                      >{{ tag }}</span
+                    >
+                  </div>
+                  <a
+                    class="project-link"
+                    :href="p.link"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    View project
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p
+            class="text-secondary mt-4"
+            style="color: var(--text-secondary); font-size: 0.85rem"
+          >
+            <i class="fa-solid fa-circle-info"></i> Project links and
+            screenshots are placeholders — swap them for your live URLs and
+            images when ready.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section id="contact" data-section="contact">
+        <div class="container-lg">
+          <div class="eyebrow">contact.form</div>
+          <h2 class="section-title">Let's build something</h2>
+          <div class="row g-4">
+            <div class="col-lg-5">
+              <div class="direct-contact-item">
+                <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                  <a href="mailto:Thasiei06@gmail.com">Thasiei06@gmail.com</a>
+                  <small>Email</small>
+                </div>
+              </div>
+              <div class="direct-contact-item">
+                <div class="icon"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                  <a href="tel:085278275">085 278 275</a>
+                  <small>Phone</small>
+                </div>
+              </div>
+              <div class="direct-contact-item">
+                <div class="icon"><i class="fa-solid fa-circle-check"></i></div>
+                <div>
+                  <span>Open to work</span>
+                  <small>Freelance &amp; full-time</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="contact-card">
+                <form id="contactForm" @submit.prevent="submitForm">
+                  <label class="form-label-custom">Name</label>
+                  <input
+                    class="form-control-custom"
+                    type="text"
+                    name="name"
+                    v-model="form.name"
+                    required
+                  />
+
+                  <label class="form-label-custom">Email</label>
+                  <input
+                    class="form-control-custom"
+                    type="email"
+                    name="email"
+                    v-model="form.email"
+                    required
+                  />
+
+                  <label class="form-label-custom">Message</label>
+                  <textarea
+                    class="form-control-custom"
+                    name="message"
+                    rows="5"
+                    v-model="form.message"
+                    required
+                  ></textarea>
+                  <input
+                    type="hidden"
+                    name="_subject"
+                    value="New message from portfolio site"
+                  />
+
+                  <button
+                    class="btn-accent"
+                    type="submit"
+                    :disabled="formStatus === 'sending'"
+                    style="width: 100%; border: none"
+                  >
+                    {{ formStatus === 'sending' ? 'Sending...' : 'Send message'
+                    }}
+                  </button>
+
+                  <p v-if="formStatus === 'success'" class="status-msg success">
+                    <i class="fa-solid fa-circle-check"></i> Thanks — your
+                    message has been sent. I'll get back to you soon.
+                  </p>
+                  <p v-if="formStatus === 'error'" class="status-msg error">
+                    <i class="fa-solid fa-circle-exclamation"></i> Something
+                    went wrong. Please email me directly at Thasiei06@gmail.com.
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        // built with Vue 3 &amp; Bootstrap 5 — © 2026 Tha Sie<span
+          class="cursor-blink"
+          >_</span
+        >
+      </footer>
+    </div>
+
+    <script>
+      // ============ NAVBAR (vanilla — works whether or not Vue loads) ============
+      function toggleNavMenu() {
+        const tabs = document.getElementById("navTabs");
+        const btn = document.getElementById("navToggleBtn");
+        const isOpen = tabs.classList.toggle("open");
+        btn.setAttribute("aria-expanded", isOpen);
+      }
+
+      function setActiveTab(id) {
+        document.querySelectorAll(".tab").forEach((t) => {
+          t.classList.toggle("active", t.dataset.target === id);
+        });
+      }
+
+      function goToSection(id) {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        setActiveTab(id);
+        const tabs = document.getElementById("navTabs");
+        if (tabs.classList.contains("open")) {
+          tabs.classList.remove("open");
+          document
+            .getElementById("navToggleBtn")
+            .setAttribute("aria-expanded", "false");
+        }
+      }
+
+      function toggleTheme() {
+        const html = document.documentElement;
+        const isDark = html.getAttribute("data-theme") !== "light";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        document.getElementById("iconMoon").style.display = isDark
+          ? "none"
+          : "";
+        document.getElementById("iconSun").style.display = isDark ? "" : "none";
+      }
+
+      window.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll("section[data-section]");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting)
+                setActiveTab(entry.target.dataset.section);
+            });
+          },
+          { rootMargin: "-40% 0px -50% 0px" },
+        );
+        sections.forEach((s) => observer.observe(s));
+        setActiveTab("home");
+      });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.21/vue.global.min.js"></script>
+    <script>
+      const { createApp, ref, reactive, onMounted } = Vue;
+
+      createApp({
+        setup() {
+          const skills = reactive({
+            frontend: [
+              "HTML",
+              "CSS",
+              "Bootstrap",
+              "JavaScript",
+              "Vue.js",
+              "Nuxt.js",
+            ],
+            backend: ["Node.js", "Express"],
+            data: ["MongoDB", "MySQL", "UX/UI"],
+          });
+
+          const projects = reactive([
+            {
+              id: "stayfinder",
+              file: "stayfinder",
+              title: "StayFinder",
+              description:
+                "A full-stack accommodation booking platform where travelers search, filter, and reserve stays in real time. Includes an availability calendar, booking flow, and a host dashboard for managing listings.",
+              tags: [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Vue.js",
+                "Node.js",
+                "Express",
+                "MongoDB",
+                "Bootstrap",
+              ],
+              image: "./assets/img/stayfinder (2).png",
+              link: "https://stay-finder-project-kappa.vercel.app/",
+            },
+            {
+              id: "diamond-game",
+              file: "diamond-game",
+              title: "Diamond Game",
+              description:
+                "A browser-based match puzzle game built with vanilla JavaScript. Focused on smooth animations, score tracking, and level progression, with a responsive board that adapts across devices.",
+              tags: ["HTML5", "CSS3"],
+              image: "./assets/img/daimond.png",
+              link: "https://diamond-game-delta.vercel.app/",
+            },
+            {
+              id: "sabaytinh",
+              file: "sabaytinh",
+              title: "SabayTinh",
+              description:
+                "An e-commerce web app for browsing and buying products online, with cart, checkout, and order management. Styled with Bootstrap for a clean, mobile-friendly shopping experience.",
+              tags: [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Vue.js",
+                "Node.js",
+                "Express",
+                "MongoDB",
+                "Bootstrap",
+              ],
+              image: "./assets/img/sabayTinh.png",
+              link: "https://sabay-tinh-g4qt.vercel.app/",
+            },
+          ]);
+
+          const form = reactive({ name: "", email: "", message: "" });
+          const formStatus = ref("");
+
+          const heroFull = `const dev = {
+  <span class="k">name</span>: <span class="s">"Tha Sie"</span>,
+  <span class="k">role</span>: <span class="s">"Web Developer"</span>,
+  <span class="k">stack</span>: [
+    <span class="s">"Vue.js"</span>, <span class="s">"Nuxt.js"</span>,
+    <span class="s">"Node.js"</span>, <span class="s">"Express"</span>,
+    <span class="s">"MongoDB"</span>, <span class="s">"MySQL"</span>
+  ],
+  <span class="k">status</span>: <span class="s">"open_to_work"</span>
+};`;
+          const heroTyped = ref("");
+
+          function scrollTo(id) {
+            goToSection(id);
+          }
+
+          async function submitForm() {
+            formStatus.value = "sending";
+            try {
+              const res = await fetch("https://formspree.io/f/xaqggobk", {
+                method: "POST",
+                headers: { Accept: "application/json" },
+                body: new FormData(document.getElementById("contactForm")),
+              });
+              if (res.ok) {
+                formStatus.value = "success";
+                form.name = "";
+                form.email = "";
+                form.message = "";
+              } else {
+                formStatus.value = "error";
+              }
+            } catch (e) {
+              formStatus.value = "error";
+            }
+          }
+
+          onMounted(() => {
+            const plain = heroFull.replace(/<[^>]+>/g, "");
+            let i = 0;
+            const typer = setInterval(() => {
+              i++;
+              heroTyped.value = plain.slice(0, i);
+              if (i >= plain.length) {
+                clearInterval(typer);
+              }
+            }, 16);
+          });
+
+          return {
+            skills,
+            projects,
+            form,
+            formStatus,
+            heroTyped,
+            scrollTo,
+            submitForm,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
